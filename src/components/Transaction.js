@@ -35,17 +35,19 @@ const Transaction = ({ mnemonic, provider, walletId, addressBalance }) => {
         await node.signTransaction(tx)
         node = node.connect(provider);
         await node.sendTransaction(tx);
-        console.log('done');
+        alert('Transaction sent. Wait a moment and check your wallet. It can take minute or two :)');
+        setReceiver('');
+        setCryptoValue(0);
     }
 
     return (
         <div>
-            <p>Send Transaction</p>
-            <form onSubmit={sendCrypto}>
-                <label>To: </label>
-                <input type="text" name="receiver" value={receiver} onChange={handleChange} />
-                <label>Value: </label>
-                <input type="number" name="cryptoValue" value={cryptoValue} onChange={handleChange} />
+            <h3 className="transaction-title">Send Transaction</h3>
+            <form className="transaction-form" onSubmit={sendCrypto}>
+                <label className="to">To: </label>
+                <input type="text" name="receiver" value={receiver} onChange={handleChange} className="receiver" />
+                <label className="value">Value: </label>
+                <input type="number" name="cryptoValue" value={cryptoValue} onChange={handleChange} className="cryptoValue" />
                 <button type="submit">Send</button>
             </form>
         </div>

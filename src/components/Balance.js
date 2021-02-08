@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Transaction from './Transaction';
 
 import { Wallet } from "ethers";
@@ -6,20 +6,30 @@ import { formatEther } from 'ethers/lib/utils';
 
 // "before arrest guilt dirt inherit sun affair ship canoe keep explain dumb"
 
-const Balance = ({ walletAddresses, mnemonic, provider }) => {
+const Balance = ({ walletAddresses, mnemonic, provider, addressesNumber, addressInQueue, setQueue }) => {
     const [openBalance, setOpenBalance] = useState(false)
     const [addressBalance, setAddressBalance] = useState('');
     const [walletId, setWalletId] = useState('')
 
+    const handleQueue = (e) => {
+        const { id } = e.target
+        switch (id) {
+            case 'plus':
+                setQueue(prevState => prevState + 5);
+                break;
+            case 'minus':
+                setQueue(prevState => prevState - 5);
+                break;
+            default:
+                alert(`Error, try again :)`);
+        }
+    }
+
 
     const selectAddress = async (e) => {
-        const id = e.target.options[e.target.selectedIndex].id;
+        const id = e.target.id;
         setWalletId(id)
         setAddressBalance('')
-        if (id === "empty") {
-            setOpenBalance(false)
-            return;
-        }
         setOpenBalance(true);
         let node = Wallet.fromMnemonic(`${mnemonic}`, `m/44'/60'/0'/0/${id}`);
         node = node.connect(provider);
@@ -28,18 +38,19 @@ const Balance = ({ walletAddresses, mnemonic, provider }) => {
             .then(response => setAddressBalance(response))
     }
 
-    const selectList = walletAddresses.map((address, index) => <option key={index} id={index} value={address}>{address}</option>)
+    const selectList = walletAddresses.map((address, index) => <li key={index} id={index} onClick={selectAddress}>{address}</li>)
 
     return (
         <div>
-            <p>Select Wallet Address:</p>
-            <select name="addresses" className="ad" onChange={selectAddress}>
-                <option value="--" id="empty">--</option>
+            <h3 className="select-title">Select Wallet Address:</h3>
+            <ul>
                 {selectList}
-            </select>
+            </ul>
+            {addressInQueue >= 5 ? <button id="minus" onClick={handleQueue}>Previous addresses</button> : null}
+            <button id="plus" onClick={handleQueue}>Next addresses</button>
             {openBalance ?
-                addressBalance ? <><p>{addressBalance} ROP</p> <Transaction walletId={walletId} addressBalance={addressBalance} mnemonic={mnemonic} provider={provider} /></>
-                    : <p>Loading...</p>
+                addressBalance ? <div className="value-container"><p className="crypto-value">{addressBalance} <span>ROP</span></p> <Transaction walletId={walletId} addressBalance={addressBalance} mnemonic={mnemonic} provider={provider} /></div>
+                    : <p className="waiting">Loading...</p>
                 : null}
         </div>
     )

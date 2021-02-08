@@ -1,38 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Oswald', sans-serif;
+}
+
 .App {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  width: 100%;
+  max-height: 100vh;
+  background: #1F1C2C;
+  background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+  background: linear-gradient(to right, #928DAB, #1F1C2C);
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+button {
+  padding: 10px 30px;
+  margin: 0 10px;
+  text-transform: uppercase;
+  font-size: 15px;
   color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  outline: none;
+  transition: .5s;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+button:hover {
+  box-shadow: 0 0 2px 2px white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form {
+  margin-top: 50px;
 }
+
+label {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 1px 1px 2px #222;
+}
+
+input {
+  display: block;
+  margin: 5px auto 10px;
+}
+
+input.mnemonic {
+  text-align: center;
+  margin: 5px auto 20px;
+  width: 600px;
+  height: 27px;
+}
+
+div.test-wallet {
+  margin-top: 50px;
+  color: white;
+  text-shadow: 1px 1px 2px #222;
+}
+
+div.test-wallet p {
+  margin: 4px auto 0;
+  padding: 5px 0;
+  width: 40%;
+  border: 1px solid white;
+  box-shadow: 1px 1px 2px #222;
+}
+
+p.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 60px;
+  color: white;
+  text-shadow: 1px 1px 2px #222;
+}
+
+.select-title {
+  margin: 10px 0 20px;
+  color: white;
+  text-shadow: 1px 1px 2px #222;
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 15px;
+}
+
+li {
+  margin: 5px auto;
+  width: 40%;
+  cursor: pointer;
+  color: #ccc;
+  text-shadow: 1px 1px 1px #444;
+  transition: .5s;
+}
+
+li:hover {
+  color: rgb(72, 211, 72);
+}
+
+.value-container {
+  margin-top: 70px;
+}
+
+.transaction-title {
+  margin: 80px 0 10px;
+  color: white;
+  text-shadow: 1px 1px 2px #222;
+}
+
+.transaction-form {
+  margin-top: 10px;
+}
+
+.cryptoValue, .receiver, .to, .value {
+  display: inline-block;
+}
+
+.cryptoValue, .receiver {
+  margin-left: 10px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.to, .value {
+  margin-left: 20px
+}
+
+.crypto-value {
+  font-size: 45px;
+  font-weight: 700;
+  color: greenyellow;
+}
+
+.crypto-value span {
+  font-size: 25px;
+  font-weight: normal;
+  color: #ddd;
+  text-shadow: 1px 1px 1px #222;
+}
+
+
+

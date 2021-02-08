@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Balance from './Balance';
 
 import { Wallet, getDefaultProvider } from "ethers";
@@ -6,28 +6,38 @@ import { Wallet, getDefaultProvider } from "ethers";
 // "before arrest guilt dirt inherit sun affair ship canoe keep explain dumb"
 
 
-const Crypto = ({ mnemonic, addressesNumber }) => {
+const Crypto = ({ mnemonic, setMnemonic }) => {
     const [walletAddresses, setWalletAddresses] = useState([]);
+    const [addressInQueue, setAddressInQueue] = useState(0)
     const provider = getDefaultProvider('ropsten');
+
+    const handleMnemonic = useCallback(() => {
+        setMnemonic('')
+    }, [setMnemonic])
 
     useEffect(() => {
         (async () => {
-            let addressList = [];
-            for (let i = 0; i < addressesNumber; i++) {
-                let node = Wallet.fromMnemonic(`${mnemonic}`, `m/44'/60'/0'/0/${i}`);
-                node = node.connect(provider);
-                await node.getAddress().then(response => addressList.push(response))
-                console.log(addressList);
+            try {
+                let addressList = [];
+                for (let i = addressInQueue; i < addressInQueue + 5; i++) {
+                    let node = Wallet.fromMnemonic(`${mnemonic}`, `m/44'/60'/0'/0/${i}`);
+                    node = node.connect(provider);
+                    await node.getAddress().then(response => addressList.push(response));
+                    console.log(addressList);
+                }
+                setWalletAddresses(addressList)
+            } catch (error) {
+                alert(error);
+                handleMnemonic()
             }
-            setWalletAddresses(addressList)
         })()
-    }, [])
+    }, [addressInQueue])
 
 
     return (
         <>{walletAddresses.length ?
-            <Balance walletAddresses={walletAddresses} mnemonic={mnemonic} provider={provider} />
-            : <p>Loading...</p>}</>
+            <Balance walletAddresses={walletAddresses} mnemonic={mnemonic} provider={provider} addressInQueue={addressInQueue} setQueue={setAddressInQueue} />
+            : <p className="loading">Loading...</p>}</>
     )
 }
 
