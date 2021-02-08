@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ether-wallet/static/css/main.ad5f877d.chunk.css",
-    "main.js": "/ether-wallet/static/js/main.f7e98a94.chunk.js",
-    "main.js.map": "/ether-wallet/static/js/main.f7e98a94.chunk.js.map",
+    "main.js": "/ether-wallet/static/js/main.a2b25189.chunk.js",
+    "main.js.map": "/ether-wallet/static/js/main.a2b25189.chunk.js.map",
     "runtime-main.js": "/ether-wallet/static/js/runtime-main.9406a891.js",
     "runtime-main.js.map": "/ether-wallet/static/js/runtime-main.9406a891.js.map",
     "static/js/2.0c2f62ce.chunk.js": "/ether-wallet/static/js/2.0c2f62ce.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.9406a891.js",
     "static/js/2.0c2f62ce.chunk.js",
     "static/css/main.ad5f877d.chunk.css",
-    "static/js/main.f7e98a94.chunk.js"
+    "static/js/main.a2b25189.chunk.js"
   ]
 }
