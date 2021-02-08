@@ -22,7 +22,7 @@ const Crypto = ({ mnemonic, setMnemonic }) => {
                 for (let i = addressInQueue; i < addressInQueue + 5; i++) {
                     let node = Wallet.fromMnemonic(`${mnemonic}`, `m/44'/60'/0'/0/${i}`);
                     node = node.connect(provider);
-                    await node.getAddress().then(response => addressList.push(response));
+                    await node.getAddress().then(response => addressList.push({ address: response, id: i }));
                     console.log(addressList);
                 }
                 setWalletAddresses(addressList)

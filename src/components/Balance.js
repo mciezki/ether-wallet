@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import Transaction from './Transaction';
 
 import { Wallet } from "ethers";
@@ -6,7 +6,7 @@ import { formatEther } from 'ethers/lib/utils';
 
 // "before arrest guilt dirt inherit sun affair ship canoe keep explain dumb"
 
-const Balance = ({ walletAddresses, mnemonic, provider, addressesNumber, addressInQueue, setQueue }) => {
+const Balance = ({ walletAddresses, mnemonic, provider, addressInQueue, setQueue }) => {
     const [openBalance, setOpenBalance] = useState(false)
     const [addressBalance, setAddressBalance] = useState('');
     const [walletId, setWalletId] = useState('')
@@ -38,7 +38,7 @@ const Balance = ({ walletAddresses, mnemonic, provider, addressesNumber, address
             .then(response => setAddressBalance(response))
     }
 
-    const selectList = walletAddresses.map((address, index) => <li key={index} id={index} onClick={selectAddress}>{address}</li>)
+    const selectList = walletAddresses.map((address, index) => <li key={index} id={address.id} onClick={selectAddress}>{address.address}</li>)
 
     return (
         <div>
